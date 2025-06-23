@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <title>Kód pre diváka</title>
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+    }
+    #watermark {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 24px;
+      color: white;
+      text-shadow: 1px 1px 4px black;
+      font-weight: bold;
+      pointer-events: none;
+      user-select: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <div id="watermark">Načítavam kód...</div>
+
+  <script>
+    const emailToCodeMap = {
+      "macatomacko@gmail.com": "KOD1111",
+      "juraj.mesiarik15@gmail.com": "KOD1234"
+    };
+
+    function getParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name) ? params.get(name).toLowerCase() : "";
+    }
+
+    const email = getParam("email");
+    let code = "Neznámy používateľ";
+
+    if(email && emailToCodeMap[email]){
+      code = emailToCodeMap[email];
+    }
+
+    document.getElementById("watermark").innerText = "Tvoj kód: " + code;
+  </script>
+</body>
+</html>
